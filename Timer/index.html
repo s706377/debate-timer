@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <title>Policy Timer</title>
+    <meta name="description" content="Policy Debate Timer">
+    <!-- Personal CSS File -->
+    <link href="../styles.css" type="text/css" rel="stylesheet">
+
+    <!-- Personal JavaScript File -->
+    <script src="policy.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <!-- Font Awesome Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+
+    <!--Favicons-->
+    <link rel="icon" type="image/png" href="../images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-success navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="../index.html">Debate Timers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#debateTypes">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="debateTypes">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../bq/bq.html">Big Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../ed/ed.html">Extemporaneous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../ld/ld.html">Lincoln-Douglas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../policy/policy.html">Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../pf/pf.html">Public Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../wsd/wsd.html">World Schools</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1 id="roundName">
+        1st Affirmative Constructive
+    </h1>
+    <div id="volumeDiv">
+        <button id="volumeButton" type="button" class="btn btn-secondary" onclick="mute()">
+            <span id="volumeIcon" class="fas fa-volume-up"></span>
+        </button>
+    </div>
+    <div id="infoDiv">
+        <button id="infoButton" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#info">
+            <span id="infoIcon" class="fas fa-info"></span>
+        </button>
+    </div>
+    <h1 id="clock">
+        0:00
+    </h1>
+    <div class="container" id="buttonGroup">
+        <div class="row text-center">
+            <div class="col-sm-auto">
+                <button type="button" class="btn btn-primary" onclick="lastRound()">
+                    <span class="fas fa-caret-left"></span> Previous</button>
+            </div>
+            <div class="col-sm-auto">
+                <button id="startButton" type="button" class="btn btn-success" onclick="start()">
+                    <span id="startIcon" class="fas fa-play"></span>
+                    <span id="startTitle"> Start</span>
+                </button>
+            </div>
+            <div class="col-sm-auto">
+                <button id="restartButton" type="button" class="btn btn-danger" onclick="reset()">
+                    <span class="fas fa-undo"></span> Reset</button>
+            </div>
+            <div class="col-sm-auto">
+                <button type="button" class="btn btn-primary" onclick="nextRound()">Next
+                    <span class="fas fa-caret-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapse" id="overtimeWrapper">
+        <h1 class="text-center" id="overtimeLabel">Overtime</h2>
+    </div>
+
+    <h1 class="text-center">Prep Time</h1>
+
+    <div class="container text-center">
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">5 Minutes
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item px-2" value="4">
+                    <a href="#">4 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="5">
+                    <a href="#">5 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="6">
+                    <a href="#">6 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="7">
+                    <a href="#">7 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="8">
+                    <a href="#">8 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="9">
+                    <a href="#">9 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="10">
+                    <a href="#">10 Minutes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h3 class="text-center">Affirmation</h3>
+                <h2 id="affClock" class="text-center prepClock">
+                    5:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button id="affPrepStartButton" type="button" class="btn btn-success" onclick="affPrepStart()">
+                        <span id="affPrepStartIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="affPrepReset()">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-auto">
+                <h3 class="text-center">Negation</h3>
+                <h2 id="negClock" class="text-center prepClock">
+                    5:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button id="negPrepStartButton" type="button" class="btn btn-success" onclick="negPrepStart()">
+                        <span id="negPrepStartIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="negPrepReset()">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Audio-->
+    <audio id="ding" src="../audio/ding.wav" preload="auto"></audio>
+    <audio id="alarm" src="../audio/alarm.wav" preload="auto"></audio>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Policy Format</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="span6">
+                            <div class="mycontent-left">
+                                1st Affirmative Constructive
+                                <br> Cross Examination
+                                <br> 1st Negative Constructive
+                                <br> Cross Examination
+                                <br> 2nd Affirmative Constructive
+                                <br> Cross Examination
+                                <br> 2nd Negative Constructive
+                                <br> Cross Examination
+                                <br> 1st Negative Rebuttal
+                                <br> 1st Affirmative Rebuttal
+                                <br> 2nd Negative Rebuttal
+                                <br> 2nd Affirmative Rebuttal
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="mycontent-right">
+                                8 Minutes
+                                <br> 3 Minutes
+                                <br> 8 Minutes
+                                <br> 3 Minutes
+                                <br> 8 Minutes
+                                <br> 3 Minutes
+                                <br> 8 Minutes
+                                <br> 3 Minutes
+                                <br> 5 Minutes
+                                <br> 5 Minutes
+                                <br> 5 Minutes
+                                <br> 5 Minutes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!--Dropdown Javascript-->
+    <script>
+        $(".dropdown-menu li").click(function () {
+            var selText = $(this).children().text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            prepTime = $(this).val();
+            affPrepReset();
+            negPrepReset();
+        });
+    </script>
+</body>
+
+</html>
